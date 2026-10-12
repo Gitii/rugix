@@ -38,7 +38,7 @@ pub fn build_binaries(target: &str) -> anyhow::Result<()> {
     run!(
         env,
         [
-            "cargo",
+            "cross",
             "build",
             "--release",
             "--target",

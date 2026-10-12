@@ -26,6 +26,13 @@ if [ "${1:-}" = "shell" ]; then
         exec --privileged devenv "/project/xtask/devenv/run.sh" zsh
 fi
 
+# Cross 0.2.5 uses x86-64 build containers, including on ARM64 hosts.
+case "$($DOCKER info --format '{{.Architecture}}')" in
+    aarch64|arm64)
+        $DOCKER run --privileged --rm tonistiigi/binfmt --install amd64
+        ;;
+esac
+
 exec $DOCKER compose \
     --file ./xtask/devenv/compose.yml \
     exec --privileged devenv "/project/xtask/devenv/run.sh" cargo xtask "$@"

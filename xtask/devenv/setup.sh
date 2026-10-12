@@ -57,3 +57,6 @@ rustup target add aarch64-unknown-linux-musl
 rustup target add aarch64-unknown-linux-gnu
 rustup target add x86_64-unknown-linux-musl
 rustup target add x86_64-unknown-linux-gnu
+
+# Use the same target-specific C toolchains as CI.
+cargo install cross --version 0.2.5 --locked
